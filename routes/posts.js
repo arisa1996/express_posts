@@ -4,9 +4,16 @@ var Post = require('../models/postsModel');
 const { errorHandle, successHandle } = require('../config/index');
 
 /* 新增單筆 post */
-router.post('/', function(req, res, next) {
+router.post('/', async function(req, res, next) {
   try {
-    const newPost = Post.create();
+    const data = req.body;
+    const newPost = await Post.create({
+      name: data.name,
+      content: data.content,
+      type: data.type,
+      tags: data.tags,
+      image: data.image
+    });
     successHandle(res, newPost);
   }catch(err) {
     errorHandle(res, err);
@@ -14,9 +21,9 @@ router.post('/', function(req, res, next) {
 });
 
 /* 取得所有 post */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
   try {
-    const posts = Post.find();
+    const posts = await Post.find();
     successHandle(res, posts);
   }catch(err) {
     errorHandle(res, err);
@@ -24,46 +31,60 @@ router.get('/', function(req, res, next) {
 });
 
 /* 取得單筆 post */
-router.get('/:id', function(req, res, next) {
+router.get('/:id', async function(req, res, next) {
   try {
-    const post = Post.find({
-      _id: req.params.id
-    });
-    successHandle(res, post);
+    const id = req.params.id
+    const post = await Post.find(id);
+    if(post !== null){
+      successHandle(res, post);
+    }else{
+      errorHandle(res, '無此文章');
+    }
   }catch(err) {
     errorHandle(res, err);
   }
 });
 
 /* 修改單筆 post */
-router.patch('/:id', function(req, res, next) {
+router.patch('/:id', async function(req, res, next) {
   try {
-    const post = Post.updateOne({
-      _id: req.params.id,
-      $set: req.body
-    });
-    successHandle(res, post);
+    const id = req.params.id
+    const data = req.body
+    if(data.name && data.content){
+      const post = await Post.findByIdAndUpdate(id, data, { new: true });
+      if(post !== null){
+        successHandle(res, post);
+      }else{
+        errorHandle(res, '無此文章');
+      }
+    }else{
+      errorHandle(res, '無此文章');
+    }
   }catch(err) {
     errorHandle(res, err);
   }
 });
 
 /* 刪除單筆 post */
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', async function(req, res, next) {
   try {
-    const post = Post.deleteOne({
-      _id: req.params.id
-    });
-    successHandle(res, post);
+    const id = req.params.id
+    const post = await Post.findByIdAndDelete(id);
+
+    if (post !== null) {
+      successHandle(res, '刪除成功');
+    } else {
+      errorHandle(res, '無此文章');
+    }
   }catch(err) {
     errorHandle(res, err);
   }
 });
 
 /* 刪除全部 post */
-router.delete('/', function(req, res, next) {
+router.delete('/', async function(req, res, next) {
   try {
-    const posts = Post.deleteMany({});
+    const posts = await Post.deleteMany({});
     successHandle(res, posts);
   }catch(err) {
     errorHandle(res, err);

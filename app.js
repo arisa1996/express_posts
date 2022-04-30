@@ -8,6 +8,8 @@ var cors = require('cors');
 var indexRouter = require('./routes/index');
 var postsRouter = require('./routes/posts');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
 
 var app = express();
 
