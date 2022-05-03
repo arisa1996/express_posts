@@ -4,24 +4,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-
-var indexRouter = require('./routes/index');
-var postsRouter = require('./routes/posts');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 
+var indexRouter = require('./routes/index');
+var postsRouter = require('./routes/posts');
+
 var app = express();
 
-const DB = process.env.DATABASE.replace(
-  '<password>',
-  process.env.DATABASE_PASSWORD
-);
-
-mongoose
-.connect(DB)
-.then(() => console.log('資料庫連接成功'))
-.catch((err) => { console.error(err) });
+mongoose.connect(process.env.DATABASE.replace('<password>', process.env.DATABASE_PASSWORD))
+  .then(() => console.log('資料庫連接成功'))
+  .catch((err) => { console.error(err) });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
