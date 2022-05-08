@@ -23,8 +23,12 @@ router.post('/', async function(req, res, next) {
 /* 取得所有 post */
 router.get('/', async function(req, res, next) {
   try {
+    const q = req.query.q !== undefined ? {'content': new RegExp(req.query.q)} : {};
     // 貼文時間由新到舊
-    const posts = await Post.find().sort({ createdAt: -1 });
+    const posts = await Post.find(q).populate({
+      path: 'user',
+      select: 'name image'
+    }).sort({ createdAt: -1 });
     successHandle(res, posts);
   }catch(err) {
     errorHandle(res, err);
