@@ -4,7 +4,7 @@ const postSchema = new Schema(
       user: {
         type: Schema.ObjectId,
         ref: 'User',
-        required: [true, '名稱必填'],
+        required: [true, 'user ID 未填寫'],
       },
       content: {
         type: String,

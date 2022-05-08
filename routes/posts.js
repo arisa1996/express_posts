@@ -7,14 +7,16 @@ const { errorHandle, successHandle } = require('../config/index');
 router.post('/', async function(req, res, next) {
   try {
     const data = req.body;
-    const newPost = await Post.create({
-      name: data.name,
-      content: data.content,
-      type: data.type,
-      tags: data.tags,
-      image: data.image
-    });
-    successHandle(res, newPost);
+    if (data !== undefined) {
+      await Post.create(data);
+      const getAllPosts = await Post.find().populate({
+        path: 'user',
+        select: 'name image'
+      });
+      successHandle(res, getAllPosts);
+    } else {
+      errorHandle(res, "請填寫內容");
+    }
   }catch(err) {
     errorHandle(res, err);
   }
