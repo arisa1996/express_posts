@@ -1,16 +1,15 @@
 const { Schema, model } = require('mongoose')
 const postSchema = new Schema(
     {
+      user: {
+        type: Schema.ObjectId,
+        ref: 'User',
+        required: [true, '名稱必填'],
+      },
       content: {
         type: String,
         required: [true, 'Content 未填寫']
       },
-      tags: [
-        {
-          type: String,
-          required: [true, '標籤(tags)未填寫'],
-        }
-      ],
       type: {
         type: String,
         required: [true, '文章類型(type)未填寫']
@@ -24,18 +23,15 @@ const postSchema = new Schema(
         default: Date.now,
         select: false
       },
-      name: {
-        type: String,
-        required: [true, '貼文姓名未填寫']
-      },
-      likes: {
-        type: Number,
-        default: 0
-      },
-      comments: {
-        type: Number,
-        default: 0
-      }
+      likes: [
+        {
+          type: Schema.ObjectId,
+          ref: "user",
+        },
+      ]
+    },
+    {
+      versionKey: false
     }
 );
 const Post = model('Post', postSchema);

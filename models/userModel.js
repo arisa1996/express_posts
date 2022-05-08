@@ -8,7 +8,10 @@ const userSchema = new Schema(
       },
       email: {
         type: String,
-        required: [true, 'email未填寫']
+        required: [true, 'email未填寫'],
+        unique: true,
+        lowercase: true,
+        select: false
       },
       password: {
         type: String,

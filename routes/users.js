@@ -7,13 +7,11 @@ const { errorHandle, successHandle } = require('../config/index');
 router.post('/', async function(req, res, next) {
   try {
     const data = req.body;
-    console.log(data)
-    const newUser = await User.create({
+    await User.create({
       name: data.name,
       email: data.email,
       password: data.password
     });
-    console.log(newUser)
     successHandle(res, '新增會員成功');
   }catch(err) {
     errorHandle(res, err);
