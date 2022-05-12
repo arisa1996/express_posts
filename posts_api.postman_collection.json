@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "fefed1e1-462d-4d44-a275-001e0a4f17db",
+		"name": "posts_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ㄑ取得所有文章",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mysterious-tor-70689.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"mysterious-tor-70689",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增單一文章",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"6277c30030e3fb38fbfa9143\",\r\n    \"content\": \"Off-White母親節活動超浪漫！全球限量Burrow玫瑰奶酪包、箭頭Logo T恤台灣買得到 還送夢幻特製花束～\",\r\n    \"tags\": \"['最新']\",\r\n    \"type\": \"時裝\" ,\r\n    \"image\": \"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/fotojet-2-1651649814.jpg?crop=1.00xw:1.00xh;0,0&resize=980:*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mysterious-tor-70689.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"mysterious-tor-70689",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改單一文章",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"arisa\",\r\n    \"content\": \"arisa edit post\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mysterious-tor-70689.herokuapp.com/posts/",
+					"protocol": "https",
+					"host": [
+						"mysterious-tor-70689",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除單一文章",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://mysterious-tor-70689.herokuapp.com/posts/",
+					"protocol": "https",
+					"host": [
+						"mysterious-tor-70689",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除所有文章",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://mysterious-tor-70689.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"mysterious-tor-70689",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
