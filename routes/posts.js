@@ -26,9 +26,8 @@ router.post('/', async function(req, res, next) {
 router.get('/', async function(req, res, next) {
   try {
     // 貼文時間由新到舊
-    const timeSort = req.query.timeSort === "asc" ? "createdAt" : "-createdAt"
+    const timeSort = req.query.timeSort === "asc" ? "createdAt" : "-createdAt";
     const q = req.query.q !== undefined ? {'content': new RegExp(req.query.q)} : {};
-    console.log(req)
 
     const posts = await Post.find(q).populate({
       path: 'user',
