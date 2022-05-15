@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var { resErrorProd, resErrorDev } = require('./config/error');
+
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
@@ -15,6 +17,16 @@ var postsRouter = require('./routes/posts');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+// 發生重大錯誤
+process.on("uncaughtException", (err) => {
+  // 記錄錯誤下來，等到所有其他服務處理完成，然後停掉該process
+  console.error('Not caught Exception =>');
+  console.error(err);
+  server.close(() => {
+    process.exit(1);
+  });
+});
 
 mongoose.connect(process.env.DATABASE.replace('<password>', process.env.DATABASE_PASSWORD))
   .then(() => console.log('資料庫連接成功'))
@@ -36,20 +48,35 @@ app.use('/posts', postsRouter);
 app.use('/users', usersRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+// error 404
+app.use((req, res) => {
+  console.error('404 err');
+  res.status(404).json({
+    status: 'error',
+    message: '無此路由資訊'
+  });
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// error 500 預期next(err)的錯誤
+app.use(function (err, req, res, next) {
+  err.statusCode = err.statusCode || 500;
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  // dev
+  if (process.env.NODE_ENV === 'dev') {
+    return resErrorDev(err, res);
+  }
+  // prod
+  if (err.name === 'ValidationError') {
+    err.message = "資料欄位未填寫正確，請重新輸入！";
+    err.isOperational = true;
+    return resErrorProd(err, res);
+  }
+  resErrorProd(err, res);
+});
+
+// 未捕捉到的 catch 
+process.on('unhandledRejection', (err, promise) => {
+  console.error('未捕捉到的 rejection：', promise, '! 原因：', err);
 });
 
 module.exports = app;

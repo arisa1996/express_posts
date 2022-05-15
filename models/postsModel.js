@@ -29,6 +29,7 @@ const postSchema = new Schema(
         },
       ]
     },
+    // Mongoose 檔案的內部修訂號
     {
       versionKey: false
     }

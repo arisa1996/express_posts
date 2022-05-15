@@ -16,10 +16,11 @@ const userSchema = new Schema(
       password: {
         type: String,
         required: [true, '密碼未填寫'],
+        minlength: 8,
       },
-      gender: {
-        type: Number,
-        default: 1,
+      sex: {
+        type: String,
+        enum: ['male', 'female']
       },
       image: {
         type: String,
