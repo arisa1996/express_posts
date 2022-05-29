@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "bb1081a8-d0d5-443c-aba8-41522c1a9276",
+		"name": "user_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13477248"
+	},
+	"item": [
+		{
+			"name": "註冊會員",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"yy\",\r\n    \"email\": \"yy@gmail.com\",\r\n    \"password\": \"yy202222\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/users/sign_up",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users",
+						"sign_up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "登入會員",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"yy@gmail.com\",\r\n    \"password\": \"yy202222\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/users/sign_in",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users",
+						"sign_in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更改密碼",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTMyMTUxMGExYTU5YTk1YzE5NDNmMyIsImlhdCI6MTY1MzgwOTYwNCwiZXhwIjoxNjU0NDE0NDA0fQ.1UqsmezjTcZRHZ25nAxxGFWXuzVIEhrZ90wr9i8akzA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"yyyyyyyy22\",\r\n    \"confirmPassword\": \"yyyyyyyy22\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/users/updatePassword",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users",
+						"updatePassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得會員資訊",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTMyMTUxMGExYTU5YTk1YzE5NDNmMyIsImlhdCI6MTY1MzgwOTc0NCwiZXhwIjoxNjU0NDE0NTQ0fQ.ysgbBgqMvnpgyte-xkFhDdy9R9YOVSrvVRcuGf989qk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/users/profile",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
