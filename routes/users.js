@@ -100,11 +100,11 @@ router.post('/sign_in', errorHandle(async(req, res, next) => {
   generateSendJWT(user, 200, res);
 }))
 
-/* 取得個人 */
+/* 取得會員資料 */
 router.get('/profile/', isAuth, errorHandle(async(req, res, next) => successHandle(res, req.user)))
 
 /* 忘記密碼 */
-router.post('/updatePassword', isAuth, errorHandle(async(req,res,next) => {
+router.post('/updatePassword', isAuth, errorHandle(async(req, res, next) => {
   const {password, confirmPassword } = req.body;
   if(password !== confirmPassword)
     return appError({ errMessage: "密碼不一致" }, next);
@@ -114,6 +114,39 @@ router.post('/updatePassword', isAuth, errorHandle(async(req,res,next) => {
     password: hash
   });
   generateSendJWT(user, 200, res)
+}))
+
+/* 更新會員資料 */
+router.patch('/updateProfile', isAuth, errorHandle(async(req, res, next) => {
+  const { name, sex, image } = req.body;
+
+    if (!name || !sex) {
+      return appError({ errMessage: "欄位未填寫正確" }, next);
+    }
+
+    if (!["male", "female"].includes(sex)) {
+      return appError({ errMessage: "性別填寫錯誤" }, next);
+    }
+
+    const updateData = {
+      name,
+      sex,
+      image
+    };
+
+    const id = req.user.id;
+    Users.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true },
+      function (err, user) {
+        if (err) {
+          return appError({ errMessage: "更新會員失敗" }, next);
+        } else {
+          successHandle(res, user);
+        }
+      }
+    );
 }))
 
 module.exports = router;

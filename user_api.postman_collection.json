@@ -124,6 +124,33 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "修改會員資訊",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/users/updateProfile",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users",
+						"updateProfile"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
