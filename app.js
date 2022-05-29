@@ -49,7 +49,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // error 404
 app.use((req, res) => {
-  console.error('404 err');
+  console.error('404 err:', req);
   res.status(404).json({
     status: 'error',
     message: '無此路由資訊'
