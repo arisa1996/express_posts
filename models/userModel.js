@@ -17,6 +17,7 @@ const userSchema = new Schema(
         type: String,
         required: [true, '密碼未填寫'],
         minlength: 8,
+        select: false
       },
       sex: {
         type: String,
@@ -32,6 +33,7 @@ const userSchema = new Schema(
         select: false
       }
     },
+    //__v: 引藏
     { versionKey: false }
 );
 const User = model('User', userSchema);

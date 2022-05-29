@@ -21,13 +21,7 @@ const postSchema = new Schema(
       createdAt: {
         type: Date,
         default: Date.now
-      },
-      likes: [
-        {
-          type: Schema.ObjectId,
-          ref: "user",
-        },
-      ]
+      }
     },
     // Mongoose 檔案的內部修訂號
     {

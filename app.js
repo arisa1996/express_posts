@@ -1,10 +1,9 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
-var { resErrorProd, resErrorDev } = require('./config/error');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
+const { resErrorProd, resErrorDev } = require('./config/error');
 
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -12,11 +11,11 @@ dotenv.config({ path: './config.env' });
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger-output.json');
 
-var indexRouter = require('./routes/index');
-var postsRouter = require('./routes/posts');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const postsRouter = require('./routes/posts');
+const usersRouter = require('./routes/users');
 
-var app = express();
+const app = express();
 
 // 發生重大錯誤
 process.on("uncaughtException", (err) => {

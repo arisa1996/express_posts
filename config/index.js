@@ -1,6 +1,5 @@
-
-function successHandle(res, data) {
-  res.status(200).json({
+function successHandle(res, data, status=200) {
+  res.status(status).json({
     status: 'success',
     data
   });
