@@ -1,0 +1,48 @@
+{
+	"info": {
+		"_postman_id": "d265e233-8c0c-4b54-92fe-d834e7256115",
+		"name": "service_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13477248"
+	},
+	"item": [
+		{
+			"name": "上傳圖片",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTRiMWFmYjcxNmQ0YmEwY2UyYjU4MyIsImlhdCI6MTY1NDk2MDU1OSwiZXhwIjoxNjU1NTY1MzU5fQ.mHJqyDwodVl7iwZGUGoQz7kgccMwy6zSFqZL7_i6bj4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": "/C:/Users/Asus/Desktop/1-by-1-1024x1024.png",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/upload",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
